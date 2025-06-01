@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyschele D.esign - UX/UI Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Define custom colors for the new black and white palette */
+        :root {
+            --color-primary-bg: #1a1a1a; /* Very Dark Grey - Main background */
+            --color-secondary-bg: #333333; /* Dark Grey - Card backgrounds */
+            --color-accent-1: #888888; /* Medium Grey - Accents, borders */
+            --color-accent-2: #555555; /* Darker Grey - Hover states, subtle elements */
+            --color-text-light: #ffffff; /* White text - For dark backgrounds */
+            --color-text-dark: #1a1a1a;  /* Very Dark Grey text - For light backgrounds (if any) */
+            --color-subtle-grey: #cccccc; /* Light Grey - For subtle text like "Coming Soon" */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-primary-bg);
+            color: var(--color-text-light); /* Default text color for dark body background */
+            cursor: none; /* Hide the default system cursor */
+            overflow-x: hidden; /* Prevent horizontal scrollbar from cursor effect */
+        }
+
+        /* Custom Tailwind classes for the defined colors */
+        .bg-primary-bg { background-color: var(--color-primary-bg); }
+        .bg-secondary-bg { background-color: var(--color-secondary-bg); }
+        .bg-accent-1 { background-color: var(--color-accent-1); }
+        .bg-accent-2 { background-color: var(--color-accent-2); }
+        .text-text-light { color: var(--color-text-light); }
+        .text-text-dark { color: var(--color-text-dark); }
+        .text-subtle-grey { color: var(--color-subtle-grey); }
+        .border-accent-1 { border-color: var(--color-accent-1); }
+        .border-accent-2 { border-color: var(--color-accent-2); }
+
+        /* Custom styles for futuristic elements */
+        .section-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* More pronounced shadow */
+        }
+
+        .project-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+            border: 2px solid transparent; /* Initial transparent border */
+            cursor: pointer; /* Indicate clickable */
+            flex: 0 0 auto; /* Prevent cards from shrinking */
+            width: 100%; /* Default to full width on small screens */
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .project-card {
+                width: calc(50% - 1rem); /* Two cards per row with gap */
+            }
+        }
+        @media (min-width: 1024px) { /* lg breakpoint */
+            .project-card {
+                width: calc(50% - 1rem); /* Two cards per row with gap */
+            }
+        }
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02); /* Lift and slightly enlarge */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+            border-color: var(--color-accent-1); /* Highlight border on hover */
+        }
+
+        .button-glow {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .button-glow:hover {
+            transform: translateY(-3px);
+            /* Accent color glow updated for B&W theme */
+            box-shadow: 0 8px 15px rgba(136, 136, 136, 0.6);
+        }
+
+        /* Fancy font for 'esign' */
+        .fancy-font {
+            font-family: 'Great Vibes', cursive;
+            font-weight: normal; /* Great Vibes is typically a script font, so normal weight works best */
+        }
+
+        /* Fixed navigation bar styling */
+        .fixed-nav {
+            z-index: 1000; /* Ensure it stays on top */
+            backdrop-filter: blur(8px); /* Frosted glass effect */
+            /* Semi-transparent primary background updated for B&W theme */
+            background-color: rgba(26, 26, 26, 0.8);
+        }
+
+        /* Apply pointer cursor to interactive elements */
+        a, button {
+            cursor: pointer;
+        }
+
+        /* Cursor highlight styling (Flashlight Effect) */
+        #cursor-highlight {
+            position: fixed;
+            width: 250px; /* Larger size for flashlight effect */
+            height: 250px;
+            background-color: rgba(255, 255, 255, 0.3); /* More opaque white for a brighter light */
+            border-radius: 50%; /* Make it a circle */
+            pointer-events: none; /* Allow clicks to pass through */
+            transform: translate(-50%, -50%); /* Center the highlight on the cursor */
+            transition: transform 0.1s ease-out; /* Smooth movement */
+            opacity: 1; /* Full opacity for the highlight element */
+            filter: blur(70px); /* Much more blur for a wider, softer light spread */
+            z-index: 999; /* Below fixed nav, above other content */
+        }
+
+        /* Modal specific styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Dark, semi-transparent overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001; /* Above everything */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--color-secondary-bg); /* Dark grey for modal content */
+            color: var(--color-text-light);
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--color-text-light);
+            cursor: pointer;
+            padding: 0.5rem;
+            line-height: 1;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .modal-close-button:hover {
+            color: var(--color-accent-1);
+        }
+
+        /* Project slider specific styles */
+        .projects-carousel-container {
+            position: relative; /* For positioning arrows */
+            overflow: hidden; /* Hide overflowing cards */
+        }
+
+        .projects-carousel {
+            display: flex;
+            overflow-x: scroll; /* Enable horizontal scrolling */
+            scroll-snap-type: x mandatory; /* Snap to cards */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+            scroll-behavior: smooth; /* Smooth scrolling for JS */
+        }
+        .projects-carousel::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Webkit browsers */
+        }
+        .projects-carousel > .project-card {
+            scroll-snap-align: start; /* Snap each card to the start */
+            margin-right: 1rem; /* Gap between cards */
+        }
+        .projects-carousel > .project-card:last-child {
+            margin-right: 0; /* No margin on the last card */
+        }
+
+        /* Carousel Navigation Arrows */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px; /* Fully rounded */
+            cursor: pointer;
+            font-size: 1.5rem;
+            opacity: 0; /* Initially hidden */
+            transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            z-index: 10; /* Above cards, below flashlight */
+        }
+        .carousel-arrow:hover {
+            background-color: rgba(0, 0, 0, 0.8); /* Darker on hover */
+            opacity: 1;
+        }
+        .carousel-arrow.left {
+            left: 1rem;
+        }
+        .carousel-arrow.right {
+            right: 1rem;
+        }
+
+        /* Show arrows on container hover */
+        .projects-carousel-container:hover .carousel-arrow {
+            opacity: 1;
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--color-accent-1);
+            color: var(--color-primary-bg);
+            padding: 1rem 1.25rem;
+            border-radius: 9999px; /* Fully rounded */
+            font-size: 1.25rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0; /* Hidden by default */
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.2s ease-in-out;
+            z-index: 990; /* Below flashlight cursor, above general content */
+        }
+
+        #back-to-top:hover {
+            background-color: var(--color-accent-2);
+            transform: translateY(-3px);
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body class="antialiased leading-relaxed">
+    <div class="min-h-screen flex flex-col">
+
+        <nav class="fixed-nav w-full py-4 px-4 sm:px-6 md:px-8 flex justify-center items-center">
+            <div class="max-w-6xl w-full flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4">
+                <a href="#top" class="text-2xl font-extrabold text-text-light hover:text-accent-1 transition duration-300 ease-in-out">
+                    Nyschele D.<span class="fancy-font">esign</span>
+                </a>
+                <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-lg font-medium">
+                    <a href="#about-me" class="text-text-light hover:text-accent-1 transition duration-300 ease-in-out">About Me</a>
+                    <a href="#projects" class="text-text-light hover:text-accent-1 transition duration-300 ease-in-out">Projects</a>
+                    <a href="#progress-skills" class="text-text-light hover:text-accent-1 transition duration-300 ease-in-out">Progress & Skills</a>
+                    <a href="#contact" class="bg-accent-1 text-primary-bg px-4 py-2 rounded-full hover:bg-accent-2 transition duration-300 ease-in-out button-glow">Contact</a>
+                </div>
+            </div>
+        </nav>
+
+        <header id="top" class="w-full bg-primary-bg py-16 sm:py-20 md:py-24 text-center pt-32">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+                <h1 class="text-6xl sm:text-7xl md:text-8xl font-extrabold text-text-light mb-4 leading-tight tracking-wide">
+                    Nyschele D.<span class="fancy-font">esign</span>
+                </h1>
+                <p class="text-lg sm:text-xl md:text-2xl text-subtle-grey font-medium leading-tight">
+                    Aspiring UX/UI Designer / B.S. User Experience Design Student ’27
+                </p>
+            </div>
+        </header>
+
+        <main class="flex-grow">
+
+            <section id="about-me" class="bg-secondary-bg py-16 sm:py-20 md:py-24 text-text-light section-card">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
+                    <h2 class="text-4xl font-bold mb-6 text-text-light">About Me</h2>
+                    <p class="text-lg leading-relaxed mb-4">
+                        Hello! I'm Nyschele D.esign, a passionate UX/UI designer dedicated to creating intuitive, user-centered experiences. My journey into design is driven by a curiosity for how people interact with technology and a desire to craft solutions that are not only functional but also delightful to use.
+                    </p>
+                    <p class="text-lg leading-relaxed">
+                        I believe in the power of empathy, research, and iterative design to solve complex problems and bring innovative ideas to life. I'm constantly learning and growing, always seeking new challenges to expand my skillset and contribute to meaningful projects.
+                    </p>
+                </div>
+            </section>
+
+            <section id="projects" class="bg-primary-bg py-16 sm:py-20 md:py-24 text-text-light section-card">
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+                    <h2 class="text-4xl font-bold mb-12 text-text-light text-center">Projects</h2>
+                    <div class="projects-carousel-container relative">
+                        <div id="projects-carousel" class="projects-carousel pb-4">
+                            <div class="bg-secondary-bg p-8 rounded-2xl shadow-md text-text-light project-card flex flex-col justify-center items-center text-center" data-project-title="Project 1">
+                                <div class="w-full h-48 bg-accent-2 rounded-xl mb-6 flex items-center justify-center text-subtle-grey text-xl font-semibold">
+                                    Project Image Placeholder
+                                </div>
+                                <h3 class="text-3xl font-semibold mb-3 text-text-light">Project 1</h3>
+                            </div>
+
+                            <div class="bg-secondary-bg p-8 rounded-2xl shadow-md text-text-light project-card flex flex-col justify-center items-center text-center" data-project-title="Project 2">
+                                <div class="w-full h-48 bg-accent-2 rounded-xl mb-6 flex items-center justify-center text-subtle-grey text-xl font-semibold">
+                                    Project Image Placeholder
+                                </div>
+                                <h3 class="text-3xl font-semibold mb-3 text-text-light">Project 2</h3>
+                            </div>
+
+                            <div class="bg-secondary-bg p-8 rounded-2xl shadow-md text-text-light project-card flex flex-col justify-center items-center text-center" data-project-title="Project 3">
+                                <div class="w-full h-48 bg-accent-2 rounded-xl mb-6 flex items-center justify-center text-subtle-grey text-xl font-semibold">
+                                    Project Image Placeholder
+                                </div>
+                                <h3 class="text-3xl font-semibold mb-3 text-text-light">Project 3</h3>
+                            </div>
+
+                            <div class="bg-secondary-bg p-8 rounded-2xl shadow-md text-text-light project-card flex flex-col justify-center items-center text-center" data-project-title="Project 4">
+                                <div class="w-full h-48 bg-accent-2 rounded-xl mb-6 flex items-center justify-center text-subtle-grey text-xl font-semibold">
+                                    Project Image Placeholder
+                                </div>
+                                <h3 class="text-3xl font-semibold mb-3 text-text-light">Project 4</h3>
+                            </div>
+                            </div>
+
+                        <button id="prev-project" class="carousel-arrow left">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button id="next-project" class="carousel-arrow right">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="text-center mt-12">
+                        <p class="text-lg text-subtle-grey">Stay tuned for exciting updates!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="progress-skills" class="bg-secondary-bg py-16 sm:py-20 md:py-24 text-text-light section-card">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
+                    <h2 class="text-4xl font-bold mb-12 text-text-light text-center">Progress & Skills</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        <div class="flex flex-col justify-center items-center text-center bg-accent-2 p-6 rounded-xl shadow-md">
+                            <h3 class="text-2xl font-semibold mb-4 text-text-light">Skills</h3>
+                            <p class="text-lg leading-relaxed mb-4 text-subtle-grey">Coming Soon</p>
+                        </div>
+                        <div class="flex flex-col justify-center items-center text-center bg-accent-2 p-6 rounded-xl shadow-md">
+                            <h3 class="text-2xl font-semibold mb-4 text-text-light">Learning Journey</h3>
+                            <p class="text-lg leading-relaxed mb-4 text-subtle-grey">Coming Soon</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="bg-secondary-bg py-16 sm:py-20 md:py-24 text-text-light text-center section-card">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
+                    <h2 class="text-4xl font-bold mb-6 text-text-light">Connect with Me</h2>
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10">
+                        <a href="mailto:contact@Nyscheled.xyz" class="bg-primary-bg text-text-light px-6 py-3 rounded-lg font-semibold text-lg hover:bg-accent-2 transition duration-300 ease-in-out shadow-md button-glow">
+                            Email Me
+                        </a>
+                        <a href="https://www.linkedin.com/in/nyscheledaniels/" target="_blank" rel="noopener noreferrer" class="bg-primary-bg text-text-light px-6 py-3 rounded-lg font-semibold text-lg hover:bg-accent-2 transition duration-300 ease-in-out shadow-md button-glow">
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="w-full bg-primary-bg py-8 text-center text-subtle-grey text-md relative">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
+                <p>&copy; 2024 Nyschele D.esign. All rights reserved.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <div id="cursor-highlight"></div>
+
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-button" id="close-modal">&times;</button>
+            <h3 id="modal-project-title" class="text-4xl font-bold mb-6 text-text-light text-center"></h3>
+            <div class="w-full h-64 bg-accent-2 rounded-xl mb-6 flex items-center justify-center text-subtle-grey text-2xl font-semibold">
+                Expanded Project Image Placeholder
+            </div>
+            <p id="modal-project-details" class="text-xl leading-relaxed text-subtle-grey text-center">Coming Soon</p>
+        </div>
+    </div>
+
+    <button id="back-to-top" class="button-glow">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                // Check if the target element exists
+                if (targetElement) {
+                    // Calculate offset for fixed header
+                    const headerOffset = document.querySelector('nav').offsetHeight;
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = elementPosition - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+        // Cursor Highlight Logic
+        const cursorHighlight = document.getElementById('cursor-highlight');
+
+        document.addEventListener('mousemove', (e) => {
+            // Update the position of the highlight div
+            cursorHighlight.style.left = e.clientX + 'px';
+            cursorHighlight.style.top = e.clientY + 'px';
+        });
+
+        // Project Modal Logic
+        const projectCards = document.querySelectorAll('.project-card');
+        const projectModal = document.getElementById('project-modal');
+        const closeModalButton = document.getElementById('close-modal');
+        const modalProjectTitle = document.getElementById('modal-project-title');
+        const modalProjectDetails = document.getElementById('modal-project-details');
+
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const title = card.getAttribute('data-project-title');
+                modalProjectTitle.textContent = title;
+                projectModal.classList.add('show');
+            });
+        });
+
+        closeModalButton.addEventListener('click', () => {
+            projectModal.classList.remove('show');
+        });
+
+        // Close modal if clicked outside content
+        projectModal.addEventListener('click', (e) => {
+            if (e.target === projectModal) {
+                projectModal.classList.remove('show');
+            }
+        });
+
+        // Project Carousel Logic
+        const projectsCarousel = document.getElementById('projects-carousel');
+        const projectsCarouselContainer = document.querySelector('.projects-carousel-container');
+        const prevButton = document.getElementById('prev-project');
+        const nextButton = document.getElementById('next-project');
+        let autoSlideInterval;
+        const slideDuration = 3000; // 3 seconds
+
+        // Function to scroll to the next card
+        function scrollToNextCard() {
+            const currentScrollLeft = projectsCarousel.scrollLeft;
+            const scrollWidth = projectsCarousel.scrollWidth;
+            const clientWidth = projectsCarousel.clientWidth;
+            const cardWidth = projectsCarousel.querySelector('.project-card').offsetWidth + 16; // Card width + margin
+
+            // Calculate the next scroll position
+            let nextScrollLeft = currentScrollLeft + cardWidth;
+
+            // If we're at or near the end, loop back to the beginning
+            if (nextScrollLeft >= scrollWidth - clientWidth - 5) { // Added a small buffer
+                nextScrollLeft = 0; // Scroll to the very beginning
+            }
+
+            projectsCarousel.scrollTo({
+                left: nextScrollLeft,
+                behavior: 'smooth'
+            });
+        }
+
+        // Start auto-sliding
+        function startAutoSlide() {
+            stopAutoSlide(); // Clear any existing interval first
+            autoSlideInterval = setInterval(scrollToNextCard, slideDuration);
+        }
+
+        // Stop auto-sliding
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        // Event listeners for manual navigation
+        prevButton.addEventListener('click', () => {
+            stopAutoSlide(); // Stop auto-slide on manual interaction
+            const scrollAmount = projectsCarousel.querySelector('.project-card').offsetWidth + 16;
+            projectsCarousel.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+            // No need to restart immediately, mouseout will handle it
+        });
+
+        nextButton.addEventListener('click', () => {
+            stopAutoSlide(); // Stop auto-slide on manual interaction
+            scrollToNextCard();
+            // No need to restart immediately, mouseout will handle it
+        });
+
+        // Pause/Resume auto-sliding on hover
+        projectsCarouselContainer.addEventListener('mouseover', stopAutoSlide);
+        projectsCarouselContainer.addEventListener('mouseout', startAutoSlide);
+
+        // Initial start of auto-sliding
+        startAutoSlide();
+
+        // Back to Top Button Logic
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) { // Show button after scrolling down 300px
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
