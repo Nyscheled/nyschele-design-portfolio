@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nyschele D.esign - UX/UI Portfolio</title>
-    <meta name="description" content="Nyschele D.esign - Aspiring UX/UI Designer. Portfolio showcasing user-centered design projects and skills.">
-    <meta name="keywords" content="UX design, UI design, User Experience, User Interface, portfolio, Nyschele D.esign, web design, mobile app design">
-    <meta name="author" content="Nyschele D.esign">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -19,7 +15,7 @@
             --color-accent-1: #888888; /* Medium Grey - Accents, borders */
             --color-accent-2: #555555; /* Darker Grey - Hover states, subtle elements */
             --color-text-light: #ffffff; /* White text - For dark backgrounds */
-            --color-text-dark: #1a1a1a; /* Very Dark Grey text - For light backgrounds (if any) */
+            --color-text-dark: #1a1a1a;  /* Very Dark Grey text - For light backgrounds (if any) */
             --color-subtle-grey: #cccccc; /* Light Grey - For subtle text like "Coming Soon" */
         }
 
@@ -89,16 +85,8 @@
             font-weight: normal; /* Great Vibes is typically a script font, so normal weight works best */
         }
 
-        /* Fixed navigation bar styling */
-        .fixed-nav {
-            z-index: 1000; /* Ensure it stays on top */
-            backdrop-filter: blur(8px); /* Frosted glass effect */
-            /* Semi-transparent primary background updated for B&W theme */
-            background-color: rgba(26, 26, 26, 0.8);
-        }
-
         /* Apply pointer cursor to interactive elements */
-        a, button, input[type="submit"] {
+        a, button {
             cursor: pointer;
         }
 
@@ -231,69 +219,40 @@
             opacity: 1;
         }
 
-        /* Back to Top Button */
-        #back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background-color: var(--color-accent-1);
-            color: var(--color-primary-bg);
-            padding: 1rem 1.25rem;
-            border-radius: 9999px; /* Fully rounded */
-            font-size: 1.25rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            opacity: 0; /* Hidden by default */
-            visibility: hidden;
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.2s ease-in-out;
-            z-index: 990; /* Below flashlight cursor, above general content */
+        /* Adjust content-wrapper to account for fixed left nav */
+        .content-wrapper {
+            margin-left: 12rem; /* Default margin for w-48 (192px) */
         }
-
-        #back-to-top:hover {
-            background-color: var(--color-accent-2);
-            transform: translateY(-3px);
+        @media (min-width: 640px) { /* sm breakpoint */
+            .content-wrapper {
+                margin-left: 14rem; /* Margin for w-56 (224px) */
+            }
         }
-
-        #back-to-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Simple contact links styling */
-        .simple-contact-link {
-            color: var(--color-text-light);
-            text-decoration: underline;
-            transition: color 0.3s ease-in-out;
-        }
-        .simple-contact-link:hover {
-            color: var(--color-accent-1);
+        @media (min-width: 768px) { /* md breakpoint */
+            .content-wrapper {
+                margin-left: 16rem; /* Margin for w-64 (256px) */
+            }
         }
     </style>
 </head>
 <body class="antialiased leading-relaxed">
-    <div class="min-h-screen flex flex-col">
+    <nav class="left-nav-container fixed left-0 top-0 h-screen bg-primary-bg py-8 px-4 z-50 flex flex-col items-start w-48 sm:w-56 md:w-64">
+        <a href="#top" class="text-2xl font-extrabold text-text-light hover:text-accent-1 transition duration-300 ease-in-out mb-8">
+            Nyschele D.<span class="fancy-font">esign</span>
+        </a>
+        <div class="flex flex-col gap-y-4 text-lg font-medium w-full">
+            <a href="#about-me" class="text-text-light hover:text-accent-1 transition duration-300 ease-in-out py-2 px-4 rounded-lg hover:bg-accent-2">About Me</a>
+            <a href="#projects" class="text-text-light hover:text-accent-1 transition duration-300 ease-in-out py-2 px-4 rounded-lg hover:bg-accent-2">Projects</a>
+            <a href="#progress-skills" class="text-text-light hover:text-accent-1 transition duration-300 ease-in-out py-2 px-4 rounded-lg hover:bg-accent-2">Progress & Skills</a>
+            <a href="#contact" class="bg-accent-1 text-primary-bg px-4 py-2 rounded-full hover:bg-accent-2 transition duration-300 ease-in-out button-glow mt-4">Contact</a>
+        </div>
+    </nav>
 
-        <nav class="fixed-nav w-full py-4 px-4 sm:px-6 md:px-8 flex justify-center items-center" aria-label="Main Navigation">
-            <div class="max-w-6xl w-full flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4">
-                <a href="#top" class="text-2xl font-extrabold text-text-light hover:text-accent-1 transition duration-300 ease-in-out" aria-label="Nyschele D.esign - Go to top">
-                    Nyschele D.<span class="fancy-font">esign</span>
-                </a>
-                <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-lg font-medium">
-                    <a href="#about-me" class="text-text-light hover:text-accent-1 transition duration-300 ease-in-out" aria-label="About Me section">About Me</a>
-                    <a href="#projects" class="text-text-light hover:text-accent-1 transition duration-300 ease-in-out" aria-label="Projects section">Projects</a>
-                    <a href="#progress-skills" class="text-text-light hover:text-accent-1 transition duration-300 ease-in-out" aria-label="Progress and Skills section">Progress & Skills</a>
-                    <a href="#contact" class="bg-accent-1 text-primary-bg px-4 py-2 rounded-full hover:bg-accent-2 transition duration-300 ease-in-out button-glow" aria-label="Contact section">Contact</a>
-                </div>
-            </div>
-        </nav>
-
-        <header id="top" class="w-full bg-primary-bg py-16 sm:py-20 md:py-24 text-center pt-32" role="banner">
+    <div class="content-wrapper flex-grow flex flex-col">
+        <header id="top" class="w-full bg-primary-bg py-16 sm:py-20 md:py-24 text-center">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
                 <h1 class="text-6xl sm:text-7xl md:text-8xl font-extrabold text-text-light mb-4 leading-tight tracking-wide">
-                    <span id="nyschele-d-text"></span><span id="esign-text" class="fancy-font"></span>
+                    Nyschele D.<span class="fancy-font">esign</span>
                 </h1>
                 <p class="text-lg sm:text-xl md:text-2xl text-subtle-grey font-medium leading-tight">
                     Aspiring UX/UI Designer / B.S. User Experience Design Student ’27
@@ -301,31 +260,26 @@
             </div>
         </header>
 
-        <main class="flex-grow" role="main">
-
-            <section id="about-me" class="bg-secondary-bg py-16 sm:py-20 md:py-24 text-text-light section-card" aria-labelledby="about-me-heading" role="region">
+        <main class="flex-grow">
+            <section id="about-me" class="bg-secondary-bg py-16 sm:py-20 md:py-24 text-text-light section-card">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
-                    <h2 id="about-me-heading" class="text-4xl font-bold mb-6 text-text-light">About Me</h2>
-                    <p class="text-lg leading-relaxed mb-4">
-                        Hello! I'm Nyschele D.esign, a passionate UX/UI designer dedicated to creating intuitive, user-centered experiences. My journey into design is driven by a curiosity for how people interact with technology and a desire to craft solutions that are not only functional but also delightful to use.
-                    </p>
+                    <h2 class="text-4xl font-bold mb-6 text-text-light">About Me</h2>
                     <p class="text-lg leading-relaxed">
-                        I believe in the power of empathy, research, and iterative design to solve complex problems and bring innovative ideas to life. I'm constantly learning and growing, always seeking new challenges to expand my skillset and contribute to meaningful projects.
+                        I’m a creative, detail-oriented UX/UI designer, currently pursuing a B.S. in User Experience Design. My background in donor operations, data reconciliation, and fraud analysis has equipped me with strong problem-solving skills, systems thinking, and a user-centered mindset. I'm passionate about creating intuitive, inclusive digital experiences and plan to further my impact with a Master’s in UX Design and a Doctorate in Educational Technology. I'm eager to apply my expertise in a collaborative team focused on innovation and human-centered design.
                     </p>
                 </div>
             </section>
 
-            <section id="projects" class="bg-primary-bg py-16 sm:py-20 md:py-24 text-text-light section-card" aria-labelledby="projects-heading" role="region">
+            <section id="projects" class="bg-primary-bg py-16 sm:py-20 md:py-24 text-text-light section-card">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
-                    <h2 id="projects-heading" class="text-4xl font-bold mb-12 text-text-light text-center">Projects</h2>
-                    <div class="projects-carousel-container relative" role="region" aria-roledescription="carousel" aria-label="My Projects">
-                        <div id="projects-carousel" class="projects-carousel pb-4" tabindex="0">
+                    <h2 class="text-4xl font-bold mb-12 text-text-light text-center">Projects</h2>
+                    <div class="projects-carousel-container relative">
+                        <div id="projects-carousel" class="projects-carousel pb-4">
                             <div class="bg-secondary-bg p-8 rounded-2xl shadow-md text-text-light project-card flex flex-col justify-center items-center text-center" data-project-title="Project 1">
                                 <div class="w-full h-48 bg-accent-2 rounded-xl mb-6 flex items-center justify-center text-subtle-grey text-xl font-semibold">
                                     Project Image Placeholder
                                 </div>
                                 <h3 class="text-3xl font-semibold mb-3 text-text-light">Project 1</h3>
-                                <p class="text-lg text-subtle-grey">Short description for Project 1.</p>
                             </div>
 
                             <div class="bg-secondary-bg p-8 rounded-2xl shadow-md text-text-light project-card flex flex-col justify-center items-center text-center" data-project-title="Project 2">
@@ -333,7 +287,6 @@
                                     Project Image Placeholder
                                 </div>
                                 <h3 class="text-3xl font-semibold mb-3 text-text-light">Project 2</h3>
-                                <p class="text-lg text-subtle-grey">Short description for Project 2.</p>
                             </div>
 
                             <div class="bg-secondary-bg p-8 rounded-2xl shadow-md text-text-light project-card flex flex-col justify-center items-center text-center" data-project-title="Project 3">
@@ -341,7 +294,6 @@
                                     Project Image Placeholder
                                 </div>
                                 <h3 class="text-3xl font-semibold mb-3 text-text-light">Project 3</h3>
-                                <p class="text-lg text-subtle-grey">Short description for Project 3.</p>
                             </div>
 
                             <div class="bg-secondary-bg p-8 rounded-2xl shadow-md text-text-light project-card flex flex-col justify-center items-center text-center" data-project-title="Project 4">
@@ -349,14 +301,13 @@
                                     Project Image Placeholder
                                 </div>
                                 <h3 class="text-3xl font-semibold mb-3 text-text-light">Project 4</h3>
-                                <p class="text-lg text-subtle-grey">Short description for Project 4.</p>
                             </div>
                         </div>
 
-                        <button id="prev-project" class="carousel-arrow left" aria-label="Previous project">
+                        <button id="prev-project" class="carousel-arrow left">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <button id="next-project" class="carousel-arrow right" aria-label="Next project">
+                        <button id="next-project" class="carousel-arrow right">
                             <i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
@@ -366,9 +317,9 @@
                 </div>
             </section>
 
-            <section id="progress-skills" class="bg-secondary-bg py-16 sm:py-20 md:py-24 text-text-light section-card" aria-labelledby="progress-skills-heading" role="region">
+            <section id="progress-skills" class="bg-secondary-bg py-16 sm:py-20 md:py-24 text-text-light section-card">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
-                    <h2 id="progress-skills-heading" class="text-4xl font-bold mb-12 text-text-light text-center">Progress & Skills</h2>
+                    <h2 class="text-4xl font-bold mb-12 text-text-light text-center">Progress & Skills</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div class="flex flex-col justify-center items-center text-center bg-accent-2 p-6 rounded-xl shadow-md">
                             <h3 class="text-2xl font-semibold mb-4 text-text-light">Skills</h3>
@@ -382,215 +333,110 @@
                 </div>
             </section>
 
-            <section id="contact" class="bg-primary-bg py-16 sm:py-20 md:py-24 text-text-light text-center section-card" aria-labelledby="contact-heading" role="region">
+            <section id="contact" class="bg-secondary-bg py-16 sm:py-20 md:py-24 text-text-light text-center section-card">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
-                    <h2 id="contact-heading" class="text-4xl font-bold mb-6 text-text-light">Connect With Me</h2>
-                    
-                    <div class="flex flex-col gap-4 mt-10">
-                        <p class="text-lg text-text-light">
-                            <a href="https://www.linkedin.com/in/nyscheledaniels/" target="_blank" rel="noopener noreferrer" class="simple-contact-link" aria-label="Nyschele's LinkedIn profile (opens in new tab)">
-                                Nyschele's LinkedIn
-                            </a>
-                        </p>
-                        <p class="text-lg text-text-light">
-                            <a href="mailto:design@nyschele.xyz" class="simple-contact-link" aria-label="Send email to design@nyschele.xyz">
-                                Design@nyschele.xyz
-                            </a>
-                        </p>
+                    <h2 class="text-4xl font-bold mb-6 text-text-light">Connect with Me</h2>
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10">
+                        <a href="mailto:contact@Nyscheled.xyz" class="bg-primary-bg text-text-light px-6 py-3 rounded-lg font-semibold text-lg hover:bg-accent-2 transition duration-300 ease-in-out shadow-md button-glow">
+                            Email Me
+                        </a>
+                        <a href="https://www.linkedin.com/in/nyscheledaniels/" target="_blank" rel="noopener noreferrer" class="bg-primary-bg text-text-light px-6 py-3 rounded-lg font-semibold text-lg hover:bg-accent-2 transition duration-300 ease-in-out shadow-md button-glow">
+                            LinkedIn
+                        </a>
                     </div>
                 </div>
             </section>
-
         </main>
 
-        <footer class="w-full bg-primary-bg py-8 text-center text-subtle-grey text-md relative" role="contentinfo">
+        <footer class="w-full bg-primary-bg py-8 text-center text-subtle-grey text-md relative">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
                 <p>&copy; 2024 Nyschele D.esign. All rights reserved.</p>
             </div>
         </footer>
-
     </div>
 
-    <div id="cursor-highlight" aria-hidden="true"></div>
+    <div id="cursor-highlight"></div>
 
-    <div id="project-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-project-title" tabindex="-1">
+    <div id="project-modal" class="modal-overlay">
         <div class="modal-content">
-            <button class="modal-close-button" id="close-modal" aria-label="Close project details">&times;</button>
+            <button class="modal-close-button" id="close-modal">&times;</button>
             <h3 id="modal-project-title" class="text-4xl font-bold mb-6 text-text-light text-center"></h3>
-            <img id="modal-project-image" src="https://placehold.co/600x400/333333/888888?text=Project+Image+Placeholder" alt="Project image placeholder" class="w-full h-64 object-cover rounded-xl mb-6 flex items-center justify-center text-subtle-grey text-2xl font-semibold">
-            <p id="modal-project-category" class="text-lg font-medium text-subtle-grey text-center mb-4">Category: Coming Soon</p>
-            <p id="modal-project-details" class="text-xl leading-relaxed text-subtle-grey text-center mb-6">Detailed project information coming soon. This is a placeholder for a more extensive case study.</p>
-            <div class="text-center">
-                <a id="modal-project-link" href="#" target="_blank" rel="noopener noreferrer" class="bg-accent-1 text-primary-bg px-6 py-3 rounded-lg font-semibold text-lg hover:bg-accent-2 transition duration-300 ease-in-out shadow-md button-glow" aria-label="View case study (opens in new tab)">
-                    View Case Study <i class="fas fa-external-link-alt ml-2"></i>
-                </a>
+            <div class="w-full h-64 bg-accent-2 rounded-xl mb-6 flex items-center justify-center text-subtle-grey text-2xl font-semibold">
+                Expanded Project Image Placeholder
             </div>
+            <p id="modal-project-details" class="text-xl leading-relaxed text-subtle-grey text-center">Coming Soon</p>
         </div>
     </div>
 
-    <button id="back-to-top" class="button-glow" aria-label="Back to top of page">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
     <script>
-        // --- DOM Element References ---
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop, // Scroll to the top of the element
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+        // Cursor Highlight Logic
         const cursorHighlight = document.getElementById('cursor-highlight');
+
+        document.addEventListener('mousemove', (e) => {
+            // Update the position of the highlight div
+            cursorHighlight.style.left = e.clientX + 'px';
+            cursorHighlight.style.top = e.clientY + 'px';
+        });
+
+        // Project Modal Logic
+        const projectCards = document.querySelectorAll('.project-card');
+        const projectModal = document.getElementById('project-modal');
+        const closeModalButton = document.getElementById('close-modal');
+        const modalProjectTitle = document.getElementById('modal-project-title');
+        const modalProjectDetails = document.getElementById('modal-project-details');
+
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const title = card.getAttribute('data-project-title');
+                modalProjectTitle.textContent = title;
+                projectModal.classList.add('show');
+            });
+        });
+
+        closeModalButton.addEventListener('click', () => {
+            projectModal.classList.remove('show');
+        });
+
+        // Close modal if clicked outside content
+        projectModal.addEventListener('click', (e) => {
+            if (e.target === projectModal) {
+                projectModal.classList.remove('show');
+            }
+        });
+
+        // Project Carousel Logic
         const projectsCarousel = document.getElementById('projects-carousel');
         const projectsCarouselContainer = document.querySelector('.projects-carousel-container');
         const prevButton = document.getElementById('prev-project');
         const nextButton = document.getElementById('next-project');
-        const backToTopButton = document.getElementById('back-to-top');
-
-        const projectModal = document.getElementById('project-modal');
-        const closeModalButton = document.getElementById('close-modal');
-        const modalProjectTitle = document.getElementById('modal-project-title');
-        const modalProjectImage = document.getElementById('modal-project-image');
-        const modalProjectCategory = document.getElementById('modal-project-category');
-        const modalProjectDetails = document.getElementById('modal-project-details');
-        const modalProjectLink = document.getElementById('modal-project-link');
-
-        // Header animation elements
-        const nyscheleDTextSpan = document.getElementById('nyschele-d-text');
-        const esignTextSpan = document.getElementById('esign-text');
-
         let autoSlideInterval;
-        const slideDuration = 3000; // 3 seconds for auto-slide
-        let focusedElementBeforeModal; // To store the element that had focus before the modal opened
+        const slideDuration = 3000; // 3 seconds
 
-        // --- Functions ---
-
-        /**
-         * Animates the header title with a typing effect and a code mix reveal.
-         */
-        function animateHeaderTitle() {
-            const nyscheleD = "Nyschele D.";
-            const esign = "esign";
-            const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:',.<>/?";
-
-            // Typewriter effect for "Nyschele D."
-            let i = 0;
-            function typeWriter() {
-                if (i < nyscheleD.length) {
-                    nyscheleDTextSpan.textContent += nyscheleD.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 200); // Typing speed (slower: 200ms)
-                } else {
-                    // Start code mix reveal after typing
-                    codeMixReveal(esign, esignTextSpan, characters, 0, 0);
-                }
-            }
-
-            // Code mix reveal effect for ".esign"
-            function codeMixReveal(targetText, element, charSet, charIndex, iteration) {
-                if (charIndex >= targetText.length) {
-                    element.textContent = targetText; // Ensure final text is correct
-                    return;
-                }
-
-                let currentText = Array.from(element.textContent);
-                // No need for revealDone, as we always proceed based on charIndex
-
-                for (let j = 0; j < targetText.length; j++) {
-                    if (j < charIndex) {
-                        currentText[j] = targetText.charAt(j); // Keep revealed characters
-                    } else {
-                        // Randomly change characters for the "mix" effect
-                        currentText[j] = charSet.charAt(Math.floor(Math.random() * charSet.length));
-                    }
-                }
-                element.textContent = currentText.join('');
-
-                if (iteration < 2) { // Number of random character changes per position (smaller: 2 iterations)
-                    setTimeout(() => codeMixReveal(targetText, element, charSet, charIndex, iteration + 1), 100); // Slightly slower random change
-                } else {
-                    // Move to the next character to reveal
-                    setTimeout(() => codeMixReveal(targetText, element, charSet, charIndex + 1, 0), 200); // Speed of revealing (slower: 200ms)
-                }
-            }
-
-            // Initialize spans as empty before animation
-            nyscheleDTextSpan.textContent = '';
-            esignTextSpan.textContent = '';
-            typeWriter();
-        }
-
-
-        /**
-         * Opens the project modal with details of the selected project.
-         * @param {HTMLElement} card - The project card element that was clicked.
-         */
-        function openProjectModal(card) {
-            focusedElementBeforeModal = document.activeElement; // Save currently focused element
-
-            const title = card.getAttribute('data-project-title');
-            modalProjectTitle.textContent = title;
-            // Set static placeholder image and text for the modal
-            modalProjectImage.src = 'https://placehold.co/600x400/333333/888888?text=Project+Image+Placeholder';
-            modalProjectImage.alt = `Image for ${title} project (placeholder)`;
-            modalProjectCategory.textContent = 'Category: Coming Soon';
-            modalProjectDetails.textContent = 'Detailed project information coming soon. This is a placeholder for a more extensive case study.';
-            modalProjectLink.href = '#'; // Placeholder link
-
-            projectModal.classList.add('show');
-            projectModal.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling background
-            modalProjectTitle.focus(); // Focus on the modal title for accessibility
-            trapFocus(projectModal); // Trap focus inside the modal
-        }
-
-        /**
-         * Closes the project modal.
-         */
-        function closeProjectModal() {
-            projectModal.classList.remove('show');
-            projectModal.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = ''; // Restore scrolling
-            if (focusedElementBeforeModal) {
-                focusedElementBeforeModal.focus(); // Return focus to the element that opened the modal
-            }
-        }
-
-        /**
-         * Traps keyboard focus within a given element (for modals).
-         * @param {HTMLElement} element - The element to trap focus within.
-         */
-        function trapFocus(element) {
-            const focusableElements = element.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-            const firstFocusableElement = focusableElements[0];
-            const lastFocusableElement = focusableElements[focusableElements.length - 1];
-
-            element.addEventListener('keydown', function(e) {
-                const isTabPressed = e.key === 'Tab';
-
-                if (!isTabPressed) {
-                    return;
-                }
-
-                if (e.shiftKey) { // if shift key pressed for shift + tab
-                    if (document.activeElement === firstFocusableElement) {
-                        lastFocusableElement.focus(); // add focus to the last focusable element
-                        e.preventDefault();
-                    }
-                } else { // if tab key is pressed
-                    if (document.activeElement === lastFocusableElement) {
-                        firstFocusableElement.focus(); // add focus to the first focusable element
-                        e.preventDefault();
-                    }
-                }
-            });
-            firstFocusableElement.focus();
-        }
-
-        /**
-         * Scrolls the projects carousel to the next card.
-         */
+        // Function to scroll to the next card
         function scrollToNextCard() {
             const currentScrollLeft = projectsCarousel.scrollLeft;
             const scrollWidth = projectsCarousel.scrollWidth;
             const clientWidth = projectsCarousel.clientWidth;
-            // Calculate card width including its right margin
-            const cardWidth = projectsCarousel.querySelector('.project-card') ? projectsCarousel.querySelector('.project-card').offsetWidth + 16 : clientWidth;
+            const cardWidth = projectsCarousel.querySelector('.project-card').offsetWidth + 16; // Card width + margin
 
+            // Calculate the next scroll position
             let nextScrollLeft = currentScrollLeft + cardWidth;
 
             // If we're at or near the end, loop back to the beginning
@@ -604,146 +450,40 @@
             });
         }
 
-        /**
-         * Scrolls the projects carousel to the previous card.
-         */
-        function scrollToPrevCard() {
-            const currentScrollLeft = projectsCarousel.scrollLeft;
-            // Calculate card width including its right margin
-            const cardWidth = projectsCarousel.querySelector('.project-card') ? projectsCarousel.querySelector('.project-card').offsetWidth + 16 : projectsCarousel.clientWidth;
-
-            let prevScrollLeft = currentScrollLeft - cardWidth;
-
-            // If we're at or near the beginning, loop to the end
-            if (prevScrollLeft < 0) {
-                prevScrollLeft = projectsCarousel.scrollWidth - projectsCarousel.clientWidth;
-            }
-
-            projectsCarousel.scrollTo({
-                left: prevScrollLeft,
-                behavior: 'smooth'
-            });
-        }
-
-        /**
-         * Starts the automatic sliding of the carousel.
-         */
+        // Start auto-sliding
         function startAutoSlide() {
             stopAutoSlide(); // Clear any existing interval first
             autoSlideInterval = setInterval(scrollToNextCard, slideDuration);
         }
 
-        /**
-         * Stops the automatic sliding of the carousel.
-         */
+        // Stop auto-sliding
         function stopAutoSlide() {
             clearInterval(autoSlideInterval);
         }
 
-        // --- Event Listeners ---
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-
-                if (targetElement) {
-                    const headerOffset = document.querySelector('nav').offsetHeight;
-                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                    const offsetPosition = elementPosition - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
-                }
-            });
-        });
-
-        // Cursor Highlight Logic
-        document.addEventListener('mousemove', (e) => {
-            cursorHighlight.style.left = e.clientX + 'px';
-            cursorHighlight.style.top = e.clientY + 'px';
-        });
-
-        // Project Modal Logic
-        // Use event delegation for dynamically added project cards
-        projectsCarousel.addEventListener('click', (e) => {
-            const card = e.target.closest('.project-card');
-            if (card) {
-                openProjectModal(card);
-            }
-        });
-
-        closeModalButton.addEventListener('click', closeProjectModal);
-
-        // Close modal if clicked outside content
-        projectModal.addEventListener('click', (e) => {
-            if (e.target === projectModal) {
-                closeProjectModal();
-            }
-        });
-
-        // Close modal on Escape key press
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && projectModal.classList.contains('show')) {
-                closeProjectModal();
-            }
-        });
-
-        // Project Carousel Navigation
+        // Event listeners for manual navigation
         prevButton.addEventListener('click', () => {
             stopAutoSlide(); // Stop auto-slide on manual interaction
-            scrollToPrevCard();
+            const scrollAmount = projectsCarousel.querySelector('.project-card').offsetWidth + 16;
+            projectsCarousel.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+            // No need to restart immediately, mouseout will handle it
         });
 
         nextButton.addEventListener('click', () => {
             stopAutoSlide(); // Stop auto-slide on manual interaction
             scrollToNextCard();
-        });
-
-        // Keyboard navigation for carousel (Left/Right arrow keys)
-        projectsCarousel.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
-                e.preventDefault(); // Prevent default scroll behavior
-                stopAutoSlide();
-                scrollToPrevCard();
-            } else if (e.key === 'ArrowRight') {
-                e.preventDefault(); // Prevent default scroll behavior
-                stopAutoSlide();
-                scrollToNextCard();
-            }
+            // No need to restart immediately, mouseout will handle it
         });
 
         // Pause/Resume auto-sliding on hover
         projectsCarouselContainer.addEventListener('mouseover', stopAutoSlide);
         projectsCarouselContainer.addEventListener('mouseout', startAutoSlide);
 
-        // Back to Top Button Logic
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) { // Show button after scrolling down 300px
-                backToTopButton.classList.add('show');
-            } else {
-                backToTopButton.classList.remove('show');
-            }
-        });
-
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // --- Initializations ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // No need to call populateProjects() as content is static
-            startAutoSlide(); // Start carousel auto-sliding
-            animateHeaderTitle(); // Start the header animation
-        });
+        // Initial start of auto-sliding
+        startAutoSlide();
     </script>
 </body>
 </html>
